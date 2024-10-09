@@ -8,8 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType; 
 import java.util.UUID; 
 import java.sql.Timestamp; 
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "registrosmedicos")
 public class RegistroMedico {
     @Id
