@@ -3,43 +3,66 @@ package com.hospital.controller;
 import com.hospital.entity.Paciente; 
 import com.hospital.service.ServicioNegocio;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/pacientes") 
+@RequestMapping("/pacientes")
 public class InterfazDeUsuario {
     private final ServicioNegocio servicioNegocio;
+    private static final Logger logger = Logger.getLogger(InterfazDeUsuario.class.getName());
 
     public InterfazDeUsuario(ServicioNegocio servicioNegocio) {
         this.servicioNegocio = servicioNegocio;
     }
 
     @PostMapping
-    public void crearPaciente(@RequestBody Paciente paciente) {
-        servicioNegocio.crearPaciente(paciente);
+    public ResponseEntity<Void> crearPaciente(@RequestBody Paciente paciente) {
+        try {
+            servicioNegocio.crearPaciente(paciente);
+            return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 Created
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al crear paciente: " + e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("No se pudo crear el paciente"); // Devuelve un error 500
+        }
     }
 
     @GetMapping
-    public List<Paciente> obtenerPacientes() {
-        return servicioNegocio.obtenerPacientes();
+    public ResponseEntity<List<Paciente>> obtenerPacientes() {
+        try {
+            List<Paciente> pacientes = servicioNegocio.obtenerPacientes();
+            return ResponseEntity.ok(pacientes); // 200 OK
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al obtener pacientes: " + e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("No se pudo obtener la lista de pacientes"); // Devuelve un error 500
+        }
     }
 
     @PutMapping("/{id}")
-    public void actualizarPaciente(@PathVariable Long id, @RequestBody Paciente paciente) {
-        // Asignar ID al paciente antes de actualizar (si es necesario)
-        paciente.setId(id); // Asegúrate de que el método setId exista en la clase Paciente
-        servicioNegocio.actualizarPaciente(paciente);
+    public ResponseEntity<Void> actualizarPaciente(@PathVariable Long id, @RequestBody Paciente paciente) {
+        try {
+            paciente.setId(id); // Asignar ID al paciente
+            servicioNegocio.actualizarPaciente(paciente);
+            return ResponseEntity.ok().build(); // 200 OK
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al actualizar paciente: " + e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("No se pudo actualizar el paciente"); // Devuelve un error 500
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void eliminarPaciente(@PathVariable Long id) {
-        // Se asume que existe un método en ServicioNegocio para encontrar al paciente por ID
-        Paciente paciente = servicioNegocio.obtenerPacientes().stream()
-                .filter(p -> p.getId().equals(id)) // Verifica si el paciente existe
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
-        
-        servicioNegocio.eliminarPaciente(paciente);
+    public ResponseEntity<Void> eliminarPaciente(@PathVariable Long id) {
+        try {
+            servicioNegocio.eliminarPaciente(id); // Asume que este método elimina por ID
+            return ResponseEntity.noContent().build(); // 204 No Content
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al eliminar paciente: " + e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("No se pudo eliminar el paciente"); // Devuelve un error 500
+        }
     }
 }

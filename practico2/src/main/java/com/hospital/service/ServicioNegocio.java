@@ -1,46 +1,83 @@
 package com.hospital.service;
 
-import javax.persistence.EntityManager; 
+import jakarta.persistence.EntityManager; 
 import java.util.List; 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import com.hospital.entity.Paciente; 
 import com.hospital.entity.RegistroMedico; 
 
 public class ServicioNegocio {
     private EntityManager entityManager;
+    private static final Logger logger = Logger.getLogger(ServicioNegocio.class.getName());
 
     public ServicioNegocio(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     public void crearPaciente(Paciente paciente) {
-        entityManager.persist(paciente);
+        try {
+            entityManager.persist(paciente);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al crear paciente: " + e.getMessage(), e);
+        }
     }
 
     public List<Paciente> obtenerPacientes() {
-        return entityManager.createQuery("SELECT p FROM Paciente p", Paciente.class).getResultList(); //puede variar el returno xq nose como es por cassandra
+        try {
+            return entityManager.createQuery("SELECT p FROM Paciente p", Paciente.class).getResultList();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al obtener pacientes: " + e.getMessage(), e);
+            return List.of(); // Retorna una lista vacía en caso de error
+        }
     }
 
     public void actualizarPaciente(Paciente paciente) {
-        entityManager.merge(paciente);
+        try {
+            entityManager.merge(paciente);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al actualizar paciente: " + e.getMessage(), e);
+        }
     }
 
     public void eliminarPaciente(Paciente paciente) {
-        entityManager.remove(paciente);
+        try {
+            entityManager.remove(paciente);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al eliminar paciente: " + e.getMessage(), e);
+        }
     }
 
     public void crearRegistroMedico(RegistroMedico registroMedico) {
-        entityManager.persist(registroMedico);
+        try {
+            entityManager.persist(registroMedico);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al crear registro médico: " + e.getMessage(), e);
+        }
     }
 
     public List<RegistroMedico> obtenerRegistrosMedicos() {
-        return entityManager.createQuery("SELECT r FROM RegistroMedico r", RegistroMedico.class).getResultList(); //x2 xd
+        try {
+            return entityManager.createQuery("SELECT r FROM RegistroMedico r", RegistroMedico.class).getResultList();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al obtener registros médicos: " + e.getMessage(), e);
+            return List.of(); // Retorna una lista vacía en caso de error
+        }
     }
 
     public void actualizarRegistroMedico(RegistroMedico registroMedico) {
-        entityManager.merge(registroMedico);
+        try {
+            entityManager.merge(registroMedico);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al actualizar registro médico: " + e.getMessage(), e);
+        }
     }
 
     public void eliminarRegistroMedico(RegistroMedico registroMedico) {
-        entityManager.remove(registroMedico);
+        try {
+            entityManager.remove(registroMedico);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al eliminar registro médico: " + e.getMessage(), e);
+        }
     }
 }
