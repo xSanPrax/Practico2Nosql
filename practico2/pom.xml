@@ -42,7 +42,11 @@
             <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
-
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+</dependency>
 
         <!-- Otros posibles requisitos -->
         <dependency>
@@ -55,6 +59,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-cassandra</artifactId>
         </dependency>
+
 
 
 

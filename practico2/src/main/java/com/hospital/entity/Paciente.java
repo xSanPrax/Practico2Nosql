@@ -1,37 +1,32 @@
 package com.hospital.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import java.sql.Timestamp; 
+import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Column;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.Date;
 
-@Entity
+@Table("pacientes") // Asegúrate de que este nombre coincida con la tabla en Cassandra
 @Getter
 @Setter
-@Table(name = "pacientes")
 public class Paciente {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private Long id; // Agregamos el campo id
 
-    @Column(name = "cedula", length = 20)
+    @PrimaryKey // Cambia a PrimaryKey en lugar de Id
+    private String id; // Cambia el tipo de Long a String si usas UUID
+
+    @Column("cedula")
     private String cedula;
 
-    @Column(name = "nombre", length = 50)
+    @Column("nombre")
     private String nombre;
 
-    @Column(name = "apellido", length = 50)
+    @Column("apellido")
     private String apellido;
 
-    @Column(name = "fechaNacimiento")
-    private Timestamp fechaNacimiento;
+    @Column("fechaNacimiento")
+    private Date fechaNacimiento; // Cambia a Date o LocalDate para Cassandra
 
-    @Column(name = "sexo", length = 1)
+    @Column("sexo")
     private String sexo;
 }

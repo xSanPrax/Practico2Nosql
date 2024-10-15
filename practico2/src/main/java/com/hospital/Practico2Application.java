@@ -1,12 +1,10 @@
-package com.hospital.practico2;
+package com.hospital; // Este paquete debe ser el padre de los paquetes de tus repositorios
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@SpringBootApplication
 public class Practico2Application {
-
     public static void main(String[] args) {
         SpringApplication.run(Practico2Application.class, args);
     }
