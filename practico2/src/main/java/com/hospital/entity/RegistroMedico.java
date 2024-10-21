@@ -1,48 +1,41 @@
 package com.hospital.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;  
-import jakarta.persistence.GeneratedValue; 
-import jakarta.persistence.GenerationType; 
-import java.util.UUID; 
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.cassandra.core.mapping.Column;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+@Table("registrosmedicos") // Asegúrate de que el nombre coincida con la tabla en Cassandra
 @Getter
 @Setter
-@Table(name = "registrosmedicos")
 public class RegistroMedico {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", length = 36)
-    private UUID id;
 
-    @Column(name = "fecha", length = 10)
+    @PrimaryKey
+    private String id; // UUID es compatible con Cassandra
+
+    @Column("fecha") // Si la fecha es un String en la base de datos, mantén este tipo
     private String fecha;
 
-    @Column(name = "tipo", length = 20)
+    @Column("tipo")
     private String tipo;
 
-    @Column(name = "diagnostico", length = 100)
+    @Column("diagnostico")
     private String diagnostico;
 
-    @Column(name = "medico", length = 50)
+    @Column("medico")
     private String medico;
 
-    @Column(name = "institucion", length = 50)
+    @Column("institucion")
     private String institucion;
 
-    @Column(name = "descripcion", length = 200)
+    @Column("descripcion")
     private String descripcion;
 
-    @Column(name = "medicacion", length = 100)
+    @Column("medicacion")
     private String medicacion;
 
-    @Column(name = "cedula", length = 20)
+    @Column("cedula")
     private String cedula;
-
-    // Getters y setters
 }

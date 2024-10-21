@@ -5,15 +5,15 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Column;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.Date;
+import java.time.LocalDate; 
 
-@Table("pacientes") // Asegúrate de que este nombre coincida con la tabla en Cassandra
+@Table("pacientes") // Nombre de la tabla en Cassandra
 @Getter
 @Setter
 public class Paciente {
 
-    @PrimaryKey // Cambia a PrimaryKey en lugar de Id
-    private String id; // Cambia el tipo de Long a String si usas UUID
+    @PrimaryKey
+    private String id; // UUID o String para Cassandra
 
     @Column("cedula")
     private String cedula;
@@ -24,8 +24,8 @@ public class Paciente {
     @Column("apellido")
     private String apellido;
 
-    @Column("fechaNacimiento")
-    private Date fechaNacimiento; // Cambia a Date o LocalDate para Cassandra
+    @Column("fecha_nacimiento") // Nombre de la columna en Cassandra
+    private LocalDate fechaNacimiento; // O usa Date si prefieres
 
     @Column("sexo")
     private String sexo;
