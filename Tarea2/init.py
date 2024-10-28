@@ -6,6 +6,7 @@ from bson import ObjectId
 app = Flask(__name__)
 
 # Conectar a MongoDB
+# connection_string = "mongodb://mongo:27017/" Esto es solo cuando se dockeriza
 connection_string = "mongodb://localhost:27017/"
 client = MongoClient(connection_string)
 db = client['program']  # Cambia 'program' si es necesario

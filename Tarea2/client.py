@@ -2,6 +2,7 @@ import requests
 import json
 from pymongo import MongoClient
 
+# connection_string = "mongodb://mongo:27017/" Esto es solo cuando se dockeriza
 connection_string = "mongodb://localhost:27017/"
 client = MongoClient(connection_string)
 
