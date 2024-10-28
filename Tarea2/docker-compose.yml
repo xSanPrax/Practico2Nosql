@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  init.py:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/program
+    networks:
+      - mongo-network
+
+  mongo:
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    networks:
+      - mongo-network
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  mongo-network:
+
+volumes:
+  mongo-data:
