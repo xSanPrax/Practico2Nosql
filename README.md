@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/xSanPrax/Practico2Nosql">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="logo.png" alt="NoSQL S.A" width="80" height="80">
   </a>
 
 <h3 align="center">API de Gestión de Pacientes</h3>
@@ -16,11 +16,6 @@
     <a href="https://github.com/xSanPrax/Practico2Nosql"><strong>Explora la documentación »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/xSanPrax/Practico2Nosql">Ver Demo</a>
-    ·
-    <a href="https://github.com/xSanPrax/Practico2Nosql/issues/new?labels=bug&template=bug-report---.md">Reportar un error</a>
-    ·
-    <a href="https://github.com/xSanPrax/Practico2Nosql/issues/new?labels=enhancement&template=feature-request---.md">Solicitar una funcionalidad</a>
   </p>
 </div>
 
