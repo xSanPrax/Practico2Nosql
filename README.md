@@ -60,6 +60,11 @@ Este proyecto está construido con las siguientes tecnologías:
 * MongoDB (Compass) - Base de datos NoSQL utilizada para almacenar los datos de los pacientes y registros médicos.
 * Docker - Para la creación de contenedores y facilitar el despliegue del proyecto.
 
+### Justificacion de la eleccion de la base de datos
+
+  Se eligió MongoDB como base de datos por su flexibilidad en el almacenamiento de documentos JSON, lo que permite una estructura de datos no relacional, 
+  ideal para el manejo de registros médicos que pueden variar en formato y contenido.
+
 <p align="right">(<a href="#readme-top">Volver arriba</a>)</p>
 
 ## Cómo empezar
