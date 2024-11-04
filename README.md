@@ -1,64 +1,229 @@
-Proyecto de Gestión Médica con Flask y MongoDB
-Este proyecto es una API para la gestión de datos de pacientes y sus registros médicos. La aplicación está construida en Flask y utiliza una base de datos NoSQL (MongoDB) para almacenar y consultar la información de pacientes y registros médicos. La aplicación se ejecuta en un contenedor de Docker, lo que facilita su despliegue y escalabilidad.
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a id="readme-top"></a>
 
-Funcionalidades
-La API incluye los siguientes endpoints:
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/xSanPrax/Practico2Nosql">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-/paciente (POST): Permite agregar un nuevo paciente a la base de datos. Si el paciente ya existe, devuelve un mensaje de error.
+<h3 align="center">API de Gestión de Pacientes</h3>
 
-/registro (POST): Agrega un registro médico asociado a un paciente. Cada registro incluye detalles como fecha, tipo, diagnóstico, médico, institución y otros datos.
+  <p align="center">
+    API REST desarrollada con Flask para gestionar pacientes y sus registros médicos.
+    <br />
+    <a href="https://github.com/xSanPrax/Practico2Nosql"><strong>Explora la documentación »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/xSanPrax/Practico2Nosql">Ver Demo</a>
+    ·
+    <a href="https://github.com/xSanPrax/Practico2Nosql/issues/new?labels=bug&template=bug-report---.md">Reportar un error</a>
+    ·
+    <a href="https://github.com/xSanPrax/Practico2Nosql/issues/new?labels=enhancement&template=feature-request---.md">Solicitar una funcionalidad</a>
+  </p>
+</div>
 
-/historial/<ci> (GET): Consulta el historial médico de un paciente según su CI. Retorna todos los registros médicos asociados al paciente.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Contenido</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">Acerca del Proyecto</a>
+      <ul>
+        <li><a href="#built-with">Tecnologías utilizadas</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Cómo empezar</a>
+      <ul>
+        <li><a href="#prerequisites">Requisitos previos</a></li>
+        <li><a href="#installation">Instalación</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Uso</a></li>
+    <li><a href="#contributing">Contribuciones</a></li>
+    <li><a href="#license">Licencia</a></li>
+    <li><a href="#contact">Contacto</a></li>
+    <li><a href="#acknowledgments">Agradecimientos</a></li>
+  </ol>
+</details>
 
-/registros (GET): Permite buscar registros médicos por criterios específicos (como tipo, diagnóstico, médico, institución).
+<!-- ABOUT THE PROJECT -->
+## Acerca del Proyecto
 
-Persistencia en la Base de Datos NoSQL (MongoDB)
-Este proyecto utiliza MongoDB para la persistencia de los datos, lo que permite almacenar datos en formato JSON sin esquemas rígidos. MongoDB almacena datos en colecciones, en este caso:
+Este proyecto es una API REST desarrollada con Flask que permite gestionar pacientes y sus registros médicos. La aplicación se conecta a una base de datos MongoDB y está dockerizada para facilitar la instalación y despliegue.
 
-datos_paciente: Almacena los datos personales de cada paciente, como CI, nombre, apellido, fecha de nacimiento y sexo.
-registro_medico: Almacena los registros médicos asociados a cada paciente, lo que incluye detalles de sus consultas, diagnósticos, y tratamientos.
-Para almacenar datos en MongoDB:
+<p align="right">(<a href="#readme-top">Volver arriba</a>)</p>
 
-Se usa el método insert_one() para agregar documentos (equivalente a registros en bases de datos relacionales).
-Los datos se obtienen usando el método find() que permite aplicar filtros y criterios de búsqueda.
+### Tecnologías utilizadas
 
-Arquitectura y Persistencia
-MongoDB
-MongoDB es la base de datos NoSQL utilizada en este proyecto. Almacena los datos en formato JSON-like, ideal para estructuras flexibles que no requieren un esquema fijo. Este proyecto utiliza dos colecciones principales:
+Este proyecto está construido con las siguientes tecnologías:
 
-datos_paciente: Almacena la información básica de los pacientes.
-registro_medico: Almacena los registros médicos asociados a los pacientes, permitiendo la consulta de datos médicos históricos.
-Docker
-La aplicación está diseñada para ejecutarse en un contenedor Docker, lo que facilita la configuración y despliegue en diferentes entornos. El contenedor de Docker incluye tanto la aplicación Flask como una instancia de MongoDB. Esto permite que la API y la base de datos se ejecuten de forma aislada y sean fácilmente escalables.
+* Python 3.13.0 - Lenguaje de programación principal.
+* Flask 3.0.3 - Framework web ligero para Python.
+* MongoDB (Compass) - Base de datos NoSQL utilizada para almacenar los datos de los pacientes y registros médicos.
+* Docker - Para la creación de contenedores y facilitar el despliegue del proyecto.
 
-Ejecución de la Aplicación en Docker
-Para ejecutar esta aplicación en un entorno Docker, puedes utilizar los siguientes pasos:
+<p align="right">(<a href="#readme-top">Volver arriba</a>)</p>
 
-Crear el archivo Dockerfile y el archivo docker-compose.yml si deseas ejecutar MongoDB y la API en servicios separados.
-Construir y ejecutar el contenedor:
+## Cómo empezar
 
-docker-compose up --build
+Para obtener una copia local de este proyecto y comenzar a trabajar con ella, sigue estos pasos sencillos.
 
-Acceso a la API: La API estará disponible en http://localhost:5000.
-Ejemplo de Uso
-Para interactuar con la API, se pueden utilizar herramientas como Postman o scripts de Python. 
+### Requisitos previos
 
+Asegúrate de tener instalados los siguientes programas:
 
-A continuación se muestra un ejemplo de cómo agregar un paciente:
+* Docker (si deseas usar Docker) - [Docker](https://www.docker.com/)
+* Python (si prefieres ejecutar el proyecto sin Docker) - [Python](https://www.python.org/downloads/)
 
-curl -X POST http://localhost:5000/paciente -H "Content-Type: application/json" -d '{
-    "CI": "12345678",
-    "Nombre": "Juan",
-    "Apellido": "Perez",
-    "Fecha de nacimiento": "1980-05-15",
+### Instalación
+
+#### Opción 1: Instalación con Docker
+
+1. Clona el repositorio:
+   ```
+   git clone https://github.com/xSanPrax/Practico2Nosql.git
+   ```
+
+2. Navega al directorio del proyecto:
+   ```
+   cd Practico2Nosql
+   ```
+
+3. Asegúrate de que Docker esté en funcionamiento y ejecuta el siguiente comando para construir y ejecutar los contenedores:
+   ```
+   docker-compose up --build
+   ```
+
+4. La aplicación debería estar corriendo en [http://localhost:5000](http://localhost:5000).
+
+#### Opción 2: Instalación sin Docker
+
+Si prefieres ejecutar el proyecto sin Docker, sigue estos pasos:
+
+1. Clona el repositorio:
+   ```
+   git clone https://github.com/xSanPrax/Practico2Nosql.git
+   ```
+
+2. Navega al directorio del proyecto:
+   ```
+   cd Practico2Nosql
+   ```
+
+3. Instala las dependencias necesarias:
+   ```
+   pip install -r requirements.txt
+   ```
+
+4. Crea un archivo `.env` en el directorio raíz del proyecto con las siguientes variables de entorno:
+
+   ```
+   FLASK_APP=app.py
+   FLASK_ENV=development
+   MONGO_URI=mongodb://localhost:27017/program
+   ```
+
+5. Ejecuta la aplicación:
+   ```
+   python init.py
+   ```
+
+6. La aplicación debería estar corriendo en [http://localhost:5000](http://localhost:5000).
+
+<p align="right">(<a href="#readme-top">Volver arriba</a>)</p>
+
+## Uso
+
+Esta API proporciona varios endpoints para gestionar pacientes y registros médicos. A continuación se describen los principales endpoints y cómo utilizarlos.
+
+### Endpoints disponibles
+
+1. **Crear un nuevo paciente**
+
+   ** Método: POST  
+   ** URL: `/paciente`  
+   ** Cuerpo de la solicitud:
+   ```
+   {
+        "_id": ObjectID"671fc468410e3d9df463db2c",
+        "CI": "3159866",
+        "Nombre": "PacienteNombre",
+        "Apellido": "PacienteApellido",
+        "Fecha de nacimiento": "1990-01-01",
+        "Sexo": "M"
+   }
+   ```
+   
+    ** Respuesta exitosa:
+    ```
+    {
+      "mensaje": "Paciente creado con éxito",
+    }
+    ```
+
+2. **Recuperar información de un paciente por ID**
+
+** Método: GET
+** URL: /paciente/<id>
+** Respuesta exitosa:
+```
+{
+    "_id": ObjectID"671fc468410e3d9df463db2c",
+    "CI": "3159866",
+    "Nombre": "PacienteNombre",
+    "Apellido": "PacienteApellido",
+    "Fecha de nacimiento": "1990-01-01",
     "Sexo": "M"
-}'
-Estructura de Carpetas
-app.py: Contiene el código principal de la API.
-Dockerfile: Archivo de configuración para crear el contenedor de la aplicación.
-docker-compose.yml: Configura los servicios necesarios (Flask y MongoDB).
-requirements.txt: Lista de dependencias de Python para la aplicación.
+}
+```
 
+3. **Agregar un registro médico a un paciente**
 
-Conclusión
-Esta API de gestión médica permite almacenar y consultar datos médicos en MongoDB de manera eficiente. La estructura basada en contenedores facilita la gestión del entorno y hace que la aplicación sea portátil y fácil de desplegar en distintos entornos de producción o desarrollo.
+** Método: POST
+** URL: /registro
+** Cuerpo de la solicitud:
+```
+{
+    "_id":ObjectID"671fc492410e3d9df463db2e",
+    "CI": "3159866",
+    "Fecha": "2024-10-28",
+    "Tipo": "Consulta",
+    "Diagnóstico": "Diagnóstico de prueba",
+    "Médico": "Dr. Ejemplo",
+    "Institución": "Instituto de Pruebas",
+    "Descripción": "Descripción de prueba",
+    "Medicación": "Medicación de prueba"
+}
+```
+
+** Respuesta exitosa:
+```
+{
+  "mensaje": "Registro médico agregado exitosamente"
+}
+```
+
+4. **Buscar un registro médico por criterio**
+
+** Método: GET
+** URL: /registros?criterio={criterio}&valor={valor}
+
+** Respuesta exitosa:
+```
+   { 
+    "_id":ObjectID"671fc492410e3d9df463db2e",
+    "CI": "3159866",
+    "Fecha": "2024-10-28",
+    "Tipo": "Consulta",
+    "Diagnóstico": "Diagnóstico de prueba",
+    "Médico": "Dr. Ejemplo",
+    "Institución": "Instituto de Pruebas",
+    "Descripción": "Descripción de prueba",
+    "Medicación": "Medicación de prueba"
+   }
+   ```
+
+<p align="right">(<a href="#readme-top">Volver arriba</a>)</p> 
