@@ -59,6 +59,7 @@ Este proyecto está construido con las siguientes tecnologías:
 * Flask 3.0.3 - Framework web ligero para Python.
 * MongoDB (Compass) - Base de datos NoSQL utilizada para almacenar los datos de los pacientes y registros médicos.
 * Docker - Para la creación de contenedores y facilitar el despliegue del proyecto.
+* Locust 2.32.0 Para las pruebas automaticas de los endpoint.
 
 ### Justificacion de la eleccion de la base de datos
 
@@ -138,6 +139,23 @@ Si prefieres ejecutar el proyecto sin Docker, sigue estos pasos:
 ## Uso
 
 Esta API proporciona varios endpoints para gestionar pacientes y registros médicos. A continuación se describen los principales endpoints y cómo utilizarlos.
+
+### Locust
+
+1. Instalarlo en el directorio del proyecto aunque deberia estar en el requirements.txt, con el comando:
+  ```
+   pip install locust
+  ```
+2. Ejecutar el comando
+  ```
+   locust
+  ```
+
+3. Entrar en el navegador a la URL
+  ```
+   http://localhost:8089
+  ```
+4. Iniciar las pruebas.
 
 ### Endpoints disponibles
 
